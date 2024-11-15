@@ -87,3 +87,14 @@ body.colorful {
   font-weight: bold;
   margin-right: 8px;
 }
+
+
+.intro-text {
+  text-align: center;
+  font-size: 1.1em;
+  color: #FF5E99; /* Neon pink color */
+  margin: 20px;
+  padding: 10px;
+  background-color: #222;
+  border-radius: 8px;
+}

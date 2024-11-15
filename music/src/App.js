@@ -48,6 +48,10 @@ function App() {
           <Route path="/library" element={<LibraryPage libraryItems={libraryItems} updateAlias={updateAlias} />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Routes>
+        <p className="intro-text">
+          We are an authentic music platform that encourages users to DIY their interfaces.
+          You have come to the right place if you’re looking for a more personalized design in your music app!
+        </p>
       </div>
     </Router>
   );
