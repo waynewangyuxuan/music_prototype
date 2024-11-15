@@ -33,7 +33,7 @@ const ProfileCustomization = () => {
       <p>Describe yourself or your interests, and let our AI recommend music and content for you!</p>
       
       <textarea
-        placeholder="Type something like 'I am a Chinese student studying CS who loves to listen to Rachmaninoff'"
+        placeholder="Type something like 'I a Chinese student studying CS who loves to listen to Rachmaninoff'"
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         rows="4"

@@ -89,27 +89,63 @@ const Home = () => {
     setSelectedItem(null);
   };
 
+  const toggleVisibility = (sectionName) => {
+    setSections(prevSections =>
+      prevSections.map(section =>
+        section.name === sectionName
+          ? { ...section, visible: !section.visible }
+          : section
+      )
+    );
+  };
+
+  const moveSection = (index, direction) => {
+    const newSections = [...sections];
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+
+    if (targetIndex < 0 || targetIndex >= sections.length) return;
+
+    const [movedSection] = newSections.splice(index, 1);
+    newSections.splice(targetIndex, 0, movedSection);
+
+    setSections(newSections);
+  };
+
   return (
     <div>
-      <h1>Home</h1>
+      <h1>You Fold sections you don't like, and you can make the sections you like the most up top.</h1>
+      <h1>This is a demo for idea if-----sections that you can drag around, shrink and shrunk, and add new sections of your choice.</h1>
       <PlaybackControls items={sections[0].items} />
 
       <div className="sections">
-        {sections.map((section) => (
+        {sections.map((section, index) => (
           <div key={section.name} className="section">
-            <h2>{section.displayName}</h2>
-            <ul>
-              {section.items.map((item, index) => (
-                <li key={index}>
-                  <span
-                    onClick={() => handleItemClick(item)}
-                    style={{ cursor: 'pointer', textDecoration: 'none' }}
-                  >
-                    {item.alias || item.name}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <h2>
+              {section.displayName}
+              <button onClick={() => toggleVisibility(section.name)} style={{ marginLeft: '10px' }}>
+                {section.visible ? 'Fold' : 'Unfold'}
+              </button>
+              <button onClick={() => moveSection(index, 'up')} disabled={index === 0}>
+                ↑
+              </button>
+              <button onClick={() => moveSection(index, 'down')} disabled={index === sections.length - 1}>
+                ↓
+              </button>
+            </h2>
+            {section.visible && (
+              <ul>
+                {section.items.map((item, itemIndex) => (
+                  <li key={itemIndex}>
+                    <span
+                      onClick={() => handleItemClick(item)}
+                      style={{ cursor: 'pointer', textDecoration: 'none' }}
+                    >
+                      {item.alias || item.name}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         ))}
       </div>
